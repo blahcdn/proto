@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option go_package = "github.com/blahcdn/cdn/proto/node";
+option go_package = "github.com/blahcdn/proto/node";
 package blahcdn.node;
 import "google/protobuf/timestamp.proto";
 import "authority.proto";

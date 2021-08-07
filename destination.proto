@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option go_package = "github.com/blahcdn/cdn/proto/destination";
+option go_package = "github.com/blahcdn/proto/destination";
 package blahcdn.destination;
 import "authority.proto";
 import "node.proto";
