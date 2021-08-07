@@ -4,11 +4,9 @@
 // 	protoc        v3.17.3
 // source: destination.proto
 
-package destination
+package proto
 
 import (
-	node "github.com/blahcdn/proto/node"
-	types "github.com/blahcdn/proto/types"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -76,8 +74,8 @@ type GetDestination struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Authority *types.Authority `protobuf:"bytes,1,opt,name=authority,proto3" json:"authority,omitempty"`
-	Headermap []*HeaderType    `protobuf:"bytes,2,rep,name=headermap,proto3" json:"headermap,omitempty"`
+	Authority *Authority    `protobuf:"bytes,1,opt,name=authority,proto3" json:"authority,omitempty"`
+	Headermap []*HeaderType `protobuf:"bytes,2,rep,name=headermap,proto3" json:"headermap,omitempty"`
 }
 
 func (x *GetDestination) Reset() {
@@ -112,7 +110,7 @@ func (*GetDestination) Descriptor() ([]byte, []int) {
 	return file_destination_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *GetDestination) GetAuthority() *types.Authority {
+func (x *GetDestination) GetAuthority() *Authority {
 	if x != nil {
 		return x.Authority
 	}
@@ -131,8 +129,8 @@ type DestinationRoute struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Sus     SusType          `protobuf:"varint,1,opt,name=sus,proto3,enum=blahcdn.destination.SusType" json:"sus,omitempty"` // is the client suspicious? if so, block it or check if client is a bot
-	HopNode []*node.NodeInfo `protobuf:"bytes,2,rep,name=hopNode,proto3" json:"hopNode,omitempty"`                           // list of nodes to hop to in order to reach origin
+	Sus     SusType     `protobuf:"varint,1,opt,name=sus,proto3,enum=blahcdn.destination.SusType" json:"sus,omitempty"` // is the client suspicious? if so, block it or check if client is a bot
+	HopNode []*NodeInfo `protobuf:"bytes,2,rep,name=hopNode,proto3" json:"hopNode,omitempty"`                           // list of nodes to hop to in order to reach origin
 }
 
 func (x *DestinationRoute) Reset() {
@@ -174,7 +172,7 @@ func (x *DestinationRoute) GetSus() SusType {
 	return SusType_NOT_SUS
 }
 
-func (x *DestinationRoute) GetHopNode() []*node.NodeInfo {
+func (x *DestinationRoute) GetHopNode() []*NodeInfo {
 	if x != nil {
 		return x.HopNode
 	}
@@ -272,9 +270,9 @@ var file_destination_proto_rawDesc = []byte{
 	0x74, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x1a, 0x25, 0x2e, 0x62, 0x6c, 0x61, 0x68, 0x63,
 	0x64, 0x6e, 0x2e, 0x64, 0x65, 0x73, 0x74, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x44,
 	0x65, 0x73, 0x74, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x6f, 0x75, 0x74, 0x65, 0x42,
-	0x26, 0x5a, 0x24, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x62, 0x6c,
-	0x61, 0x68, 0x63, 0x64, 0x6e, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x64, 0x65, 0x73, 0x74,
-	0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x1a, 0x5a, 0x18, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x62, 0x6c,
+	0x61, 0x68, 0x63, 0x64, 0x6e, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x06, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x33,
 }
 
 var (
@@ -296,8 +294,8 @@ var file_destination_proto_goTypes = []interface{}{
 	(*GetDestination)(nil),   // 1: blahcdn.destination.GetDestination
 	(*DestinationRoute)(nil), // 2: blahcdn.destination.DestinationRoute
 	(*HeaderType)(nil),       // 3: blahcdn.destination.HeaderType
-	(*types.Authority)(nil),  // 4: blahcdn.types.Authority
-	(*node.NodeInfo)(nil),    // 5: blahcdn.node.NodeInfo
+	(*Authority)(nil),        // 4: blahcdn.types.Authority
+	(*NodeInfo)(nil),         // 5: blahcdn.node.NodeInfo
 }
 var file_destination_proto_depIdxs = []int32{
 	4, // 0: blahcdn.destination.GetDestination.authority:type_name -> blahcdn.types.Authority
@@ -318,6 +316,8 @@ func file_destination_proto_init() {
 	if File_destination_proto != nil {
 		return
 	}
+	file_authority_proto_init()
+	file_node_proto_init()
 	if !protoimpl.UnsafeEnabled {
 		file_destination_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GetDestination); i {
