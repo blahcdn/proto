@@ -3,7 +3,6 @@ syntax = "proto3";
 option go_package = "github.com/blahcdn/proto";
 package blahcdn.destination;
 import "authority.proto";
-import "node.proto";
 
 service Destination {
     rpc Get (GetDestination) returns (DestinationRoute);
@@ -16,7 +15,7 @@ message GetDestination {
 
 message DestinationRoute {
   SusType sus = 1; // is the client suspicious? if so, block it or check if client is a bot
-  repeated node.NodeInfo hopNode = 2; // list of nodes to hop to in order to reach origin 
+  repeated HopNode hopNodes = 2; // list of nodes to hop to in order to reach origin 
 }
 
 enum SusType {
@@ -29,4 +28,11 @@ enum SusType {
 message HeaderType {
   string key = 1;
   string value = 2;
+}
+
+
+message HopNode {
+  string reigon = 1;
+  types.Authority authority = 2;
+  int32 id = 3;
 }

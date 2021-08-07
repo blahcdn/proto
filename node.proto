@@ -2,7 +2,6 @@ syntax = "proto3";
 
 option go_package = "github.com/blahcdn/proto";
 package blahcdn.node;
-import "google/protobuf/timestamp.proto";
 import "authority.proto";
 
 service Node {
@@ -10,12 +9,10 @@ service Node {
 }
 
 message GetNodeInfo{
-  string id = 1;
-  blahcdn.types.Authority authority = 2;
-  google.protobuf.Timestamp requestStart = 3;
+   string id = 1;
+  optional blahcdn.types.Authority authority = 2;
 }
 
 message NodeInfo {
   string region = 1;
-  google.protobuf.Timestamp requestStart = 2;
 }
