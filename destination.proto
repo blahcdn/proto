@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+option go_package = "github.com/blahcdn/cdn/proto/destination";
+package blahcdn.destination;
+import "authority.proto";
+import "node.proto";
+
+service Destination {
+    rpc Get (GetDestination) returns (DestinationRoute);
+}
+
+message GetDestination {
+  types.Authority authority = 1;
+  repeated HeaderType headermap = 2;
+}
+
+message DestinationRoute {
+  SusType sus = 1; // is the client suspicious? if so, block it or check if client is a bot
+  repeated node.NodeInfo hopNode = 2; // list of nodes to hop to in order to reach origin 
+}
+
+enum SusType {
+  NOT_SUS = 0;
+  RATELIMIT = 1;
+  ROBOT = 2;
+}
+
+
+message HeaderType {
+  string key = 1;
+  string value = 2;
+}

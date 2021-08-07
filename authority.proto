@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+option go_package = "github.com/blahcdn/cdn/proto/types";
+package blahcdn.types;
+
+message Authority {
+  oneof address { // ip of the origin server
+    fixed32 v4 = 1;
+    bytes v6 = 2;
+  }
+  uint32 port = 3;
+}
